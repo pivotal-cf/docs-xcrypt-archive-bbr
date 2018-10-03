@@ -58,7 +58,7 @@ To achieve connectivity between XCrypt Archive for BBR and the Zettaset Virtual 
 1. Convert the PEM files to JKS using the following command on the kmip master node:
 
     ``` 
-    $ /usr/share/zts/bin/pem2jks.sh -e /usr/share/zts/ca/certs/<new_node>-kmipclient.cert.pem /usr/share/zts/ca/private/<new_node>-kmipclient.key.pem /root/<new_node>.jks
+    $ /usr/share/zts/bin/pem2jks.sh -e /usr/share/zts/ca/certs/<new_node>-kmipclient.cert.pem /usr/share/zts/ca/private/<new_node>-kmipclient.key.pem /root/<new_node>.jks /usr/share/zts/ca/certs/cacert.pem
     ``` 
     Record the name of the JKS password. The resulting JKS is stored in `/root/<new_node>.jks`.
 
