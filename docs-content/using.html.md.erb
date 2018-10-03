@@ -1,15 +1,73 @@
 ---
-title: Using YOUR-PRODUCT-NAME
+title: Using Zettaset XCrypt Archive for BOSH Backup and Restore
 owner: Partners
 ---
 
-This topic describes how to use YOUR-PRODUCT-NAME.
+This topic describes how to use Zettaset XCrypt Archive for BOSH Backup and Restore.
 
-##<a id='using'></a> Using YOUR-PRODUCT-NAME
 
-**This topic should include any instructions for how to use the service or dashboard created by the tile. 
-Give procedures for how to perform the different functions offered by your product and provide screenshots where necessary.** 
+## <a id='using'></a> Using XCrypt Archive for BOSH Backup and Restore
 
-**You can also use this section to include information about Architecture and Troubleshooting for known errors. 
-If you include a Troubleshooting section, follow the Symptom/Explanation format used in the 
-[Okta Troubleshooting](http://docs.pivotal.io/p-identity/okta/troubleshooting.html) topic**.
+XCrypt Archive for BBR can encrypt any file type. The resulting encrypted files append the zts extension to their original file names. Metadata is created for each encrypted file and stored in the same directory, using the .zts.ztsdata extension. This file contains non-sensitive metadata required for decryption. If the metadata is corrupted, decryption will not be possible. Thus, metadata files must be backed up along with the encrypted files. XCrypt Archive for BBR expects the .zts and .zts.ztsdata files to reside in the same directory.
+
+Use the following command to encrypt and decrypt files and directories:
+
+    ``` 
+/usr/share/zts/bin/zts.sh filecrypto --mode encrypt|decrypt --kmip <path-to-kmip.xml> --input <path> --output <path> --preserve-path --tar --archive-name --work-dir blocksize <value>
+    ``` 
+
+`--mode`
+Requested cryptographic mode: either encrypt, decrypt, or re-encrypt.
+
+`--kmip`
+Path to the kmip.xml file, which is required to access keys on the Zettaset Virtual Enterprise Key Manager.
+
+`--input`
+Location of the files and directories to encrypt or decrypt. The tool will always operate on all files and directories under the input directory. There is no option for non-recursive processing.
+
+`--output`
+Location of the output files. The output directory will maintain the same tree structure as the input directory.
+
+`--preserve-path`
+Preserves the absolute path of the original files in the output directory. Optional. Then this argument is not present, relative paths are used. When used with the `--tar` argument, files in the tar archive preserve their absolute path values, otherwise relative paths are used in the tar archive.
+
+`--tar`
+Creates a single archive for all encrypted files. Each file is compressed using ZIP compression. The compressed files are then encrypted individually and added to the tar archive. When creating the tar archive, if the `--preserve-path` setting is applied, files keep their absolute path value in the archive file. Otherwise, a relative path is used.
+
+`--archive-name`
+The name of the archive file created with the `--tar` option is used.
+
+`--work-dir`
+A working directory that will store intermediate files when using the `--tar` option. This directory must be on a file system that contains enough space to store the largest input file. When decrypting a tar archive, the working directory must have enough space to store all of the decrypted files when they are temporarily extracted from the tar file. The path specified must be a non-existing directory; XCrypt Archive for BBR will create the directory and then delete it when the process is complete.
+
+`--blocksize`
+The cryptographic block size to use when encrypting. This setting is optional, the default block size is 5 Megabytes (5242880 bytes). Values must be specified in bytes. There is no need to specify block size when decrypting.
+
+
+## <a id='examples'></a> Examples
+
+To encrypt a directory and generate a compressed, encrypted archive:
+
+    ``` 
+    $ /usr/share/zts/bin/zts.sh filecrypto --mode encrypt \
+    --input /usr/share/zts/input \
+    --output /usr/share/zts/output \
+    --blocksize 5242880 \
+    --tar --archive-name ENCRYPTED\
+    --work-dir /tmp
+    --kmip /etc/zts/conf.default/kmip.xml
+    ``` 
+
+This command will create ENCRYPTED.tar in the `/usr/share/zts/output` directory.
+
+To decrypt a compressed, encrypted archive:
+
+    ``` 
+    $ /usr/share/zts/bin/zts.sh filecrypto --mode decrypt \
+    --input ./ENCRYPTED.tar \
+    --output / --tar \
+    --kmip /etc/zts/conf.default/kmip.xml
+    ``` 
+
+This command will uncompress and decrypt the ENCRYPTED.tar archive and place the decrypted files under the same relative path as they were stored in the compressed and encrypted archive.
+

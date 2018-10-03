@@ -1,115 +1,115 @@
 ---
-title: YOUR-PRODUCT-NAME (Beta)
+title: Zettaset XCrypt Archive for BOSH Backup and Restore
 owner: Partners
 ---
 
-<p class="note warning">
-<strong>WARNING! </strong>
-The PRODUCT-NAME for PCF tile is currently in beta and is intended for evaluation and test purposes only. 
-Do not use this product in a PCF production environment.
-</p>
+<p class="note warning"><strong>WARNING:</strong> The Zettaset XCrypt Archive for BOSH Backup and Restore (BBR) is intended for evaluation and test purposes only. Do not use this product in a production Cloud Foundry environment.</p>
 
-**This topic begins with a brief description of what the product tile (e.g. Apigee Edge Service Broker for PCF) does, 
-whereas the Overview section below describes what the service itself (e.g. Apigee Edge) does. See below for an example.**
+This documentation describes Zettaset XCrypt Archive for BBR. 
 
-This documentation describes the Apigee Edge Service Broker for Pivotal Cloud Foundry (PCF). The Apigee Edge Service 
-Broker for PCF enables developers to manage APIs for their PCF apps through the Apigee Edge management console.
+BOSH Backup and Restore provides a framework for the backup and restore of your BOSH deployments in Pivotal Cloud Foundry environments. Those backups contain your critical data and must be protected. Zettaset XCrypt Archive for BBR provides a powerful solution for protecting your Cloud Foundry backups. 
 
-**Note**: This description will appear under **OVERVIEW** in the tile's listing on 
-[Pivotal Network](http://network.pivotal.io).
+## <a id='overview'></a> Overview
 
-## <a id='overview'></a>Overview
+XCrypt Archive for BBR is a high-performance, software-only backup and restore solution that works with structured and unstructured data. It interoperates with KMIP-compliant key managers, including Zettaset's Virtual Enterprise Key Manager. If you already have a key manager, you can continue to use it. If not, you can use Zettaset's software-only solution. 
 
-**The overview describes the service that your product offers to PCF developers. 
-Make sure to overview the features of the integration.
-Don't focus only on the overview of your product that is being integrated.
-See below for an example.**
+XCrypt Archive for BBR utilizes Advanced Encryption Standard (AES) 256-bit encryption, the highest level attainable. AES has been adopted by the U.S. government and is now used worldwide. It also provides AES-NI accelerated performance in equipped servers.
 
-The Apigee Edge Service Broker for PCF registers a service broker with PCF and exposes its service plans on the 
-Marketplace. Developers can then create service plan instances using Apps Manager or the Cloud Foundry Command 
-Line Interface (cf CLI) and bind them to their apps.
+Zettaset's software-only approach to encryption simplifies deployment and eliminates the need for proprietary appliances. Its configurable key policies and key administration provide the flexibility necessary for your enterprise. It's designed to be deployed on existing commodity hardware, drastically reducing the total cost of ownership compared to proprietary appliance-based solutions. Zettaset's products can be deployed and maintained by existing IT staff and do not require specialized encryption experts. 
 
-Creating an Apigee Edge for PCF service instance and binding it to an app creates an Apigee Edge API proxy that 
-handles requests for the app. This lets developers use the Apigee Edge management console to manage API request 
-handling between clients and the app.
-
-**Note**: This overview will appear under **OVERVIEW**, combined with the description above in the tile's listing on 
-[Pivotal Network](http://network.pivotal.io).
 
 ## <a id='features'></a>Key Features
 
-**Note**: This feature list will appear under **FEATURES** in the tile's listing on 
-[Pivotal Network](http://network.pivotal.io). 
-Make sure you list the key features of the tile (the integration). 
-We cannot accept a list of the key features of your product that we are integrating.
+Zettaset XCrypt Archive for BBR includes the following key features:
 
-YOUR-PRODUCT-NAME includes the following key features:
+* **Low Total Cost of Ownership (TCO)**
 
-* Feature one
-* Feature two
-* Feature three
+    Requires no proprietary hardware; it's a software-only encryption solution that can be deployed on commodity and existing hardware - just point and encrypt.
+    Does not require specialized encryption experts on staff. Can be deployed and maintained by existing IT staff.
+
+* **High Performance**
+
+    Negligable performance impact on existing processes. 
+    All data is compressed prior to encryption, saving valuable storage space. 
+
+* **Versatile**
+
+    Secures structured and unstructured data.
+
+* **Interoperable**
+
+    Command line interface simplifies automation and integration.
+    KMIP compatible & PKCS#11 certified. 
+    Compatible with all major key managers and HSMs, including Thales and Gemalto.
 
 
+## <a id="snapshot"></a> Product Snapshot
 
-## <a id="snapshot"></a>Product Snapshot
+<p class='note'><strong>Note:</strong> As of PCF v2.0, Elastic Runtime is renamed Pivotal Application Service (PAS).</p>
 
-The following table provides version and version-support information about PRODUCT-NAME.
+The following table provides version and version-support information about Zettaset XCrypt Archive for BBR.
 
 <table class="nice">
     <th>Element</th>
     <th>Details</th>
     <tr>
-        <td>Tile version</td>
-        <td>vYOUR-VERSION-NUMBER</td>
+        <td>Plugin version</td>
+        <td>v1.0</td>
     </tr>
     <tr>
         <td>Release date</td>
-        <td>YOUR-RELEASE-DATE (Ex: July 1, 2017)</td>
+        <td>October 5, 2018</td>
     </tr>
     <tr>
         <td>Software component version</td>
-        <td>vYOUR-SOFTWARE-COMPONENT-VERSION-NUMBER</td>
+        <td>v8.4.2</td>
     </tr>
     <tr>
-        <td>Compatible Ops Manager version(s)</td>
-        <td>vYOUR-COMPATIBLE-OPS-MAN-VERSION (Ex. v1.11.x, v1.12.x, and v2.0.x)</td>
+        <td>Compatible Greenplum version(s)</td>
+        <td>v3.x, v4.x, and v5.x</td>
     </tr>
     <tr>
-        <td>Compatible Pivotal Application Service version(s)</td>
-        <td>vYOUR-COMPATIBLE-PIVOTAL-APPLICATION-SERVICE-VERSION (Ex. v1.11.x, v1.12.x, and v2.0.X)</td>
+        <td>Compatible GemFire version(s)</td>
+        <td>v8.x and upwards</td>
+    </tr>
+    <tr>
+        <td>Compatible Pivotal Application Service (formerly known as Elastic Runtime) version(s)</td>
+        <td>v1.11.x, v1.12.x, and v2.0.X</td>
     </tr>
     <tr>
         <td>IaaS support</td>
-        <td>AWS?, Azure?, GCP?, OpenStack?, and vSphere?</td>
+        <td>AWS, Azure, GCP, OpenStack, and vSphere</td>
     </tr>
     <tr>
         <td>IPsec support?</td>
-        <td>[Yes or No]</td>
+        <td>Yes</td>
     </tr>
 </table>
-* As of PCF v2.0, <em>Elastic Runtime</em> is renamed <em>Pivotal Application Service (PAS)</em>. 
 
-## <a id="reqs"></a>Requirements
 
-**Provide any general or specific requirements, prerequisites, or dependencies here. 
-A general requirement might be something like, "An AppDynamics account." 
-A specific requirement might be something like, "Packaging Dependencies for Offline Buildpacks."**
+## <a id="reqs"></a> Requirements
 
-YOUR-PRODUCT-NAME has the following requirements:
+Zettaset XCrypt Archive for BBR has the following requirements:
 
-+ PREREQUISITE-1
++ Java v1.7.0 or greater
 
-+ PREREQUISITE-2
++ Java Cryptography Extension (JCE) Unlimited Strength Juridiction Policy files
 
-## <a id="limitations"></a>Limitations
++ libselinux-python and cryptsetup-luks
 
-**List any known limitations.**
++ 3rd Party, KMIP-compliant Key Manager or Zettaset's Virtual Enterprise Key Manager (V-EKM). To download and install vEKM, contact our [sales team](mailto:sales@zettaset.com).
 
-## <a id="feedback"></a>Feedback
 
-If you have a feature request, questions, or information about a bug, please email
-[Pivotal Cloud Foundry Feedback](mailto:cf-feedback@pivotal.io) list or send an email to YOUR-SUPPORT-EMAIL.
+## <a id="feedback"></a> Feedback and Support
 
-## <a id='license'></a>License
+At Zettaset, our goal is to ensure a positive, consistent, and successful customer experience with each one of our software security solutions. As part of our ongoing commitment, Zettaset offers a world-class customer service and support program to effectively complement our industry-leading family of big data encryption and key management solutions.
 
-**List any license information here.**
+Every aspect of our customer service and support program is staffed by expert, highly-trained engineers who have years of experience with Zettaset security solutions as well as a deep domain experience around encryption, key management, access control, authentication, cloud security, multiple database environments, and compliance requirements.
+
+If you have a feature request, question, or information about a bug, please email
+[our support team](mailto:support@zettaset.com).
+
+
+## <a id='license'></a> License
+
+Contact our [sales team](mailto:sales@zettaset.com) to learn more about commercial licenses and support.

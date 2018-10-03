@@ -1,30 +1,90 @@
 ---
-title: Installing and Configuring YOUR-PRODUCT-NAME
+title: Installing and Configuring Zettaset XCrypt Archive for BOSH Backup and Restore
 owner: Partners
 ---
 
-This topic describes how to install and configure YOUR-PRODUCT-NAME.
+This topic describes how to install and configure Zettaset XCrypt Archive for BBR.
 
-##<a id='install'></a> Install and Configure YOUR-PRODUCT-NAME
 
-To install the YOUR-PRODUCT-NAME file on the Ops Manager Installation Dashboard, do the following:
+##<a id='install'></a> Install Zettaset XCrypt Archive for BBR
 
-1. Download the product file from Pivotal Network.
+Your Greenplum and Pivotal Gemfire primary, seconday, and segment nodes should be installed prior to installing Zettaset XCrypt Archive for BBR. Once Greenplum and Pivotal Gemfire have been successfully installed, install Zettaset XCrypt Archive for BBR on all segment nodes that hold data volumes. After the Zettaset installation, data can be populated on the data volumes. 
 
-1. Navigate to the Ops Manager Installation Dashboard and click **Import a Product** to upload the product file. 
+For existing Greenplum and Pivotal Gemfire environments, data must be backed up prior to the Zettaset XCrypt Archive for BBR installation. After the Zettaset installation, data can be restored to the data volumes. 
 
-1. Under the **Import a Product** button, click **+** next to the version number of YOUR-PRODUCT-NAME. 
-This adds the tile to your staging area.
 
-1. Click the newly added **YOUR-PRODUCT-NAME** tile.
+## <a id='installation'></a> Installing XCrypt Archive for BBR
 
-1. **This portion of the procedure should tell the users how to configure the newly added tile by
-walking them through the sections. Which fields should they fill out? What are the different
-checkboxes? Include relevant screenshots here.** 
+To install XCrypt Archive for BBR on your target node, do the following:
 
-1. Click **Save**.
+1. Install java:.
 
-1. Return to the Ops Manager Installation Dashboard and click **Apply changes** to install YOUR-PRODUCT-NAME tile.
+    ``` 
+    $ yum install java-1.7.0-openjdk -y
+    ``` 
 
-**If needed, include additional configuration information below. For example, maybe there are
-configuration options not required for installation but which could be useful for certain users.**
+1. Set `$JAVA_HOME`. For example:
+
+    ``` 
+    $ export JAVA_HOME=/usr/lib/jvm/jre-1.7.0-openjdk
+    ```
+
+1. Install the XCrypt Archive rpm:.
+
+    ``` 
+    $ rpm -ivh zts-filecrypto-client-8.4.2.x86_64.rpm
+    ``` 
+
+1. Update `$JAVA_HOME` in `/etc/zts/conf.default/set-env.sh`.
+
+1. Proceed to [Configuring Connectivity to the Zettaset Virtual Enterprise Key Manager](#configuring_conn). 
+
+
+## <a id='configuring_conn'></a> Configuring Connectivity to the Zettaset Virtual Enterprise Key Manager
+
+To achieve connectivity between XCrypt Archive for BBR and the Zettaset Virtual Enterprise Key Manager (V-EKM), do the following:
+
+1. Create a client certificate and key on the V-EKM’s kmip master node by executing the following command:
+
+    ``` 
+    $ /usr/share/zts/bin/zts-ca.sh make-user-cert <new_node> -x -o <ca_org_name> -u <ca_org_unit> -e <ca_org_email> -l <ca_org_locale> -s <ca_org_state> -c <ca_org_country>
+    ``` 
+
+    Use the same `ca_org_*` values from the hosts.inv file used for the V-EKM installation.
+    This command will generate a certificate and a key file on the kmip master node:
+    * /usr/share/zts/ca/certs/<new_node>-kmipclient.cert.pem
+    * /usr/share/zts/ca/private/<new_node>-kmipclient.key.pem
+
+1. Convert the PEM files to JKS using the following command on the kmip master node:
+
+    ``` 
+    $ /usr/share/zts/bin/pem2jks.sh -e /usr/share/zts/ca/certs/<new_node>-kmipclient.cert.pem /usr/share/zts/ca/private/<new_node>-kmipclient.key.pem /root/<new_node>.jks
+    ``` 
+    Record the name of the JKS password. The resulting JKS is stored in `/root/<new_node>.jks`.
+
+1. Copy the CA cert and the jks from the kmip master node to the node running XCrypt Archive for BBR:
+
+    ``` 
+    $ scp /usr/share/zts/ca/certs/cacert.pem node05:/opt
+    $ scp /root/<new_node>.jks node05:/opt
+    ``` 
+
+1. Update the kmip properties in `/etc/zts/conf.default/kmip.xml` with the KmipServer, and KmipPort values from your Zettaset Virtual Enterprise Key Manager, which can be found in `/etc/zts/conf.default/kmip-client.properties` on the kmip master node. Include the JKS password and file location, and the CA cert file location. For example:
+
+    ``` 
+    <kmip>
+      <server>10.1.0.1</server>
+      <port>6666</port>
+      <debug>false</debug>
+      <cafile>/opt/cacert.pem</cafile>
+      <keystore>/opt/node05.jks</keystore>
+      <client>10.1.0.5</client>
+      <passwd>yourJKSpassword</passwd>
+      <timeout>30000</timeout>
+      <connect>
+        <retries>10</retries>
+        <retrydelay>5000</retrydelay>
+      </connect>
+    </kmip>
+    ``` 
+
