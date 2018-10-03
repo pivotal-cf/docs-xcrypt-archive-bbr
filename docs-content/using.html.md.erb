@@ -12,9 +12,9 @@ XCrypt Archive for BBR can encrypt any file type. The resulting encrypted files 
 
 Use the following command to encrypt and decrypt files and directories:
 
-    ``` 
+``` 
 /usr/share/zts/bin/zts.sh filecrypto --mode encrypt|decrypt --kmip <path-to-kmip.xml> --input <path> --output <path> --preserve-path --tar --archive-name --work-dir blocksize <value>
-    ``` 
+``` 
 
 `--mode`
 Requested cryptographic mode: either encrypt, decrypt, or re-encrypt.
@@ -48,26 +48,26 @@ The cryptographic block size to use when encrypting. This setting is optional, t
 
 To encrypt a directory and generate a compressed, encrypted archive:
 
-    ``` 
-    $ /usr/share/zts/bin/zts.sh filecrypto --mode encrypt \
-    --input /usr/share/zts/input \
-    --output /usr/share/zts/output \
-    --blocksize 5242880 \
-    --tar --archive-name ENCRYPTED\
-    --work-dir /tmp
-    --kmip /etc/zts/conf.default/kmip.xml
-    ``` 
+``` 
+$ /usr/share/zts/bin/zts.sh filecrypto --mode encrypt \
+--input /usr/share/zts/input \
+--output /usr/share/zts/output \
+--blocksize 5242880 \
+--tar --archive-name ENCRYPTED\
+--work-dir /tmp
+--kmip /etc/zts/conf.default/kmip.xml
+``` 
 
 This command will create ENCRYPTED.tar in the `/usr/share/zts/output` directory.
 
 To decrypt a compressed, encrypted archive:
 
-    ``` 
-    $ /usr/share/zts/bin/zts.sh filecrypto --mode decrypt \
-    --input ./ENCRYPTED.tar \
-    --output / --tar \
-    --kmip /etc/zts/conf.default/kmip.xml
-    ``` 
+``` 
+$ /usr/share/zts/bin/zts.sh filecrypto --mode decrypt \
+--input ./ENCRYPTED.tar \
+--output / --tar \
+--kmip /etc/zts/conf.default/kmip.xml
+``` 
 
 This command will uncompress and decrypt the ENCRYPTED.tar archive and place the decrypted files under the same relative path as they were stored in the compressed and encrypted archive.
 
