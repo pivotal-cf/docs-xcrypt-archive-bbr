@@ -29,7 +29,7 @@ Location of the files and directories to encrypt or decrypt. The tool will alway
 Location of the output files. The output directory will maintain the same tree structure as the input directory.
 
 `--preserve-path`
-Preserves the absolute path of the original files in the output directory. Optional. Then this argument is not present, relative paths are used. When used with the `--tar` argument, files in the tar archive preserve their absolute path values, otherwise relative paths are used in the tar archive.
+Preserves the absolute path of the original files in the output directory. This setting is optional. When this argument is not present, relative paths are used. When used with the `--tar` argument, files in the tar archive preserve their absolute path values, otherwise relative paths are used in the tar archive.
 
 `--tar`
 Creates a single archive for all encrypted files. Each file is compressed using ZIP compression. The compressed files are then encrypted individually and added to the tar archive. When creating the tar archive, if the `--preserve-path` setting is applied, files keep their absolute path value in the archive file. Otherwise, a relative path is used.
