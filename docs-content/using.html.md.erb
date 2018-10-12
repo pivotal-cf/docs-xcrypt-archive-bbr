@@ -1,14 +1,14 @@
 ---
-title: Using Zettaset XCrypt Archive for BOSH Backup and Restore
+title: Using Zettaset XCrypt Archive for PCF
 owner: Partners
 ---
 
-This topic describes how to use Zettaset XCrypt Archive for BOSH Backup and Restore.
+This topic describes how to use Zettaset XCrypt Archive for PCF.
 
 
-## <a id='using'></a> Using XCrypt Archive for BOSH Backup and Restore
+## <a id='using'></a> Using XCrypt Archive for PCF
 
-XCrypt Archive for BBR can encrypt any file type. The resulting encrypted files append the zts extension to their original file names. Metadata is created for each encrypted file and stored in the same directory, using the .zts.ztsdata extension. This file contains non-sensitive metadata required for decryption. If the metadata is corrupted, decryption will not be possible. Thus, metadata files must be backed up along with the encrypted files. XCrypt Archive for BBR expects the .zts and .zts.ztsdata files to reside in the same directory.
+XCrypt Archive for PCF can encrypt any file type. The resulting encrypted files append the zts extension to their original file names. Metadata is created for each encrypted file and stored in the same directory, using the .zts.ztsdata extension. This file contains non-sensitive metadata required for decryption. If the metadata is corrupted, decryption will not be possible. Thus, metadata files must be backed up along with the encrypted files. XCrypt Archive for PCF expects the .zts and .zts.ztsdata files to reside in the same directory.
 
 Use the following command to encrypt and decrypt files and directories:
 
