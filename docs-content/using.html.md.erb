@@ -38,7 +38,12 @@ Creates a single archive for all encrypted files. Each file is compressed using 
 The name of the archive file created with the `--tar` option is used.
 
 `--work-dir`
-A working directory that will store intermediate files when using the `--tar` option. This directory must be on a file system that contains enough space to store the largest input file. When decrypting a tar archive, the working directory must have enough space to store all of the decrypted files when they are temporarily extracted from the tar file. The path specified must be a non-existing directory; XCrypt Archive for BBR will create the directory and then delete it when the process is complete.
+A working directory that stores intermediate files when using the `--tar` option.
+This directory must be on a file system that contains enough space to store the largest input file.
+When decrypting a tar archive, the working directory must have enough space to store all
+of the decrypted files when they are temporarily extracted from the tar file.
+The path specified must be a non-existing directory;
+XCrypt Archive for PCF creates the directory and then deletes it when the process is complete.
 
 `--blocksize`
 The cryptographic block size to use when encrypting. This setting is optional, the default block size is 5 Megabytes (5242880 bytes). Values must be specified in bytes. There is no need to specify block size when decrypting.
