@@ -1,18 +1,18 @@
 ---
-title: Installing and Configuring Zettaset XCrypt Archive for PCF
+title: Installing and Configuring Zettaset XCrypt Archive for Pivotal Platform
 owner: Partners
 ---
 
-This topic describes how to install and configure Zettaset XCrypt Archive for PCF.
+This topic describes how to install and configure Zettaset XCrypt Archive for Pivotal Platform.
 
 
-##<a id='install'></a> Install Zettaset XCrypt Archive for PCF
+##<a id='install'></a> Install Zettaset XCrypt Archive for Pivotal Platform
 
-When integrated with a BOSH Backup and Restore implementation, Zettaset XCrypt Archive encrypts backup artifacts as they are transferred to the storage location and decrypts them when they are returned to the PCF environment.
+When integrated with a BOSH Backup and Restore implementation, Zettaset XCrypt Archive encrypts backup artifacts as they are transferred to the storage location and decrypts them when they are returned to the Pivotal Platform environment.
 
-## <a id='installation'></a> Installing XCrypt Archive for PCF
+## <a id='installation'></a> Installing XCrypt Archive for Pivotal Platform
 
-To install XCrypt Archive for PCF on your target node, do the following:
+To install XCrypt Archive for Pivotal Platform on your target node, do the following:
 
 1. Install java:.
 
@@ -39,7 +39,7 @@ To install XCrypt Archive for PCF on your target node, do the following:
 
 ## <a id='configuring_conn'></a> Configuring Connectivity to the Zettaset Virtual Enterprise Key Manager
 
-To achieve connectivity between XCrypt Archive for PCF and the Zettaset Virtual Enterprise Key Manager (V-EKM), do the following:
+To achieve connectivity between XCrypt Archive for Pivotal Platform and the Zettaset Virtual Enterprise Key Manager (V-EKM), do the following:
 
 1. Create a client certificate and key on the V-EKM’s kmip master node by executing the following command:
 
@@ -59,7 +59,7 @@ To achieve connectivity between XCrypt Archive for PCF and the Zettaset Virtual 
     ``` 
     Record the name of the JKS password. The resulting JKS is stored in `/root/<new_node>.jks`.
 
-1. Copy the CA cert and the jks from the kmip master node to the node running XCrypt Archive for PCF:
+1. Copy the CA cert and the jks from the kmip master node to the node running XCrypt Archive for Pivotal Platform:
 
     ``` 
     $ scp /usr/share/zts/ca/certs/cacert.pem node05:/opt
