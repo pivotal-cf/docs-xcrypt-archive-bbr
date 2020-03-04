@@ -1,14 +1,14 @@
 ---
-title: Using Zettaset XCrypt Archive for Pivotal Platform
+title: Using Zettaset XCrypt Archive for VMware Tanzu
 owner: Partners
 ---
 
-This topic describes how to use Zettaset XCrypt Archive for Pivotal Platform.
+This topic describes how to use Zettaset XCrypt Archive for VMware Tanzu.
 
 
-## <a id='using'></a> Using XCrypt Archive for Pivotal Platform
+## <a id='using'></a> Using XCrypt Archive for VMware Tanzu
 
-XCrypt Archive for Pivotal Platform can encrypt any file type. The resulting encrypted files append the zts extension to their original file names. Metadata is created for each encrypted file and stored in the same directory, using the .zts.ztsdata extension. This file contains non-sensitive metadata required for decryption. If the metadata is corrupted, decryption will not be possible. Thus, metadata files must be backed up along with the encrypted files. XCrypt Archive for Pivotal Platform expects the .zts and .zts.ztsdata files to reside in the same directory.
+XCrypt Archive for VMware Tanzu can encrypt any file type. The resulting encrypted files append the zts extension to their original file names. Metadata is created for each encrypted file and stored in the same directory, using the .zts.ztsdata extension. This file contains non-sensitive metadata required for decryption. If the metadata is corrupted, decryption will not be possible. Thus, metadata files must be backed up along with the encrypted files. XCrypt Archive for VMware Tanzu expects the .zts and .zts.ztsdata files to reside in the same directory.
 
 Use the following command to encrypt and decrypt files and directories:
 
@@ -43,7 +43,7 @@ This directory must be on a file system that contains enough space to store the 
 When decrypting a tar archive, the working directory must have enough space to store all
 of the decrypted files when they are temporarily extracted from the tar file.
 The path specified must be a non-existing directory;
-XCrypt Archive for Pivotal Platform creates the directory and then deletes it when the process is complete.
+XCrypt Archive for VMware Tanzu creates the directory and then deletes it when the process is complete.
 
 `--blocksize`
 The cryptographic block size to use when encrypting. This setting is optional, the default block size is 5 Megabytes (5242880 bytes). Values must be specified in bytes. There is no need to specify block size when decrypting.
